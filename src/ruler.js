@@ -116,8 +116,8 @@ ruler.prototype.builder = function () {
     });
   };
 
-
   const constructRuler = function (container, alignment) {
+    console.log("constructRuler 3")
     let canvas,
       dimension = alignment === 'left' || alignment === 'right' ? VERTICAL : HORIZONTAL,
       rulerStyle = dimension === VERTICAL ? 'rul_ruler_Vertical' : 'rul_ruler_Horizontal',
@@ -126,7 +126,8 @@ ruler.prototype.builder = function () {
     ruler.prototype.utils.addClasss(element, ['rul_ruler', rulerStyle, 'rul_align_' + alignment]);
     canvas = container.appendChild(element);
     rulerz[alignment] = ruler.prototype.rulerConstructor(canvas, options, dimension);
-    rulerz[alignment].drawRuler(container.offsetWidth, options.rulerHeight);
+    //rulerz[alignment].drawRuler(container.offsetWidth, options.rulerHeight);
+    rulerz[alignment].drawRuler(10000, options.rulerHeight);
     positionRuler(rulerz[alignment], alignment);
     attachListeners(container, rulerz[alignment]);
   };
@@ -255,7 +256,6 @@ ruler.prototype.builder = function () {
       }
     });
   };
-
 
   const clearGuides = function () {
     guides.forEach(function (guide) {
@@ -463,7 +463,8 @@ ruler.prototype.guideLine = function (line, _dragContainer, lineDimension, optio
     _curPosDelta = curDelta || 0,
     dragContainer = _dragContainer,
     dimension = lineDimension || 2,
-    moveCB = movecb || function () {};
+    moveCB = movecb || function () {
+    };
 
   const curPosDelta = function (val) {
     if (typeof val === 'undefined') {
@@ -544,7 +545,8 @@ ruler.prototype.guideLine = function (line, _dragContainer, lineDimension, optio
         draggable.cv().style.pointerEvents = 'all';
         options.container.style.cursor = null;
         guideLine.style.cursor = null;
-        document.onmousemove = function () {};
+        document.onmousemove = function () {
+        };
         hideToolTip();
         ruler.prototype.utils.removeClasss(guideLine, ['rul_line_dragged']);
       }
