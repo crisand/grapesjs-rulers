@@ -27,6 +27,7 @@ ruler.prototype.builder = function () {
       fontFamily: 'arial',
       fontSize: '8px',
       strokeStyle: 'gray',
+      fillStyle: "red",
       sides: ['top', 'left'],
       cornerSides: ['TL'],
       lineWidth: 1,
@@ -363,8 +364,11 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
     rulThickness = canvas.height = _rulerThickness;
     rulScale = _rulerScale || rulScale;
     context.strokeStyle = options.strokeStyle;
+    //context.strokeStyle = "#000000";
+    //context.fillStyle = "#000000";
     context.fillStyle = options.fillStyle;
     context.font = options.fontSize + ' ' + options.fontFamily;
+    //context.font = "12px" + ' ' + "Tahoma";
     context.lineWidth = options.lineWidth;
     context.beginPath();
     drawPoints();
