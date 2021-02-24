@@ -355,7 +355,6 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
 
   const setScale = function (newScale) {
     rulScale = parseFloat(newScale);
-    console.log("new scale", newScale)
     zoom = newScale * 100;
     drawPoints();
     return rulScale;
@@ -379,10 +378,11 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
       label = '',
       delta = 0,
       draw = false,
+      zoom = 100 / rulScale,
       lineLengthMax = 0,
       lineLengthMed = rulThickness / 3,
       lineLengthMin = rulThickness / 2;
-    console.log("rulThickness", zoom, rulScale, rulLength, lineLengthMax, lineLengthMed, lineLengthMin)
+    //console.log("rulThickness", zoom, rulScale, rulLength, lineLengthMax, lineLengthMed, lineLengthMin)
     for (let pos = 0; pos <= 1000; pos++) {
       delta = pos;
       //delta = Math.round(rulScale * ((rulLength / 2) - pos) * 100) / 100
@@ -404,9 +404,9 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
         draw = true;
       }
       if (draw) {
-        context.moveTo(pos * 0.94, rulThickness + 0.5);
-        context.lineTo(pos * 0.94, pointLength + 0.5);
-        context.fillText(label, pos * 0.94 + 2, (rulThickness / 2) + 1);
+        context.moveTo(pos * (zoom / 100), rulThickness + 0.5);
+        context.lineTo(pos * (zoom / 100), pointLength + 0.5);
+        context.fillText(label, pos * (zoom / 100) + 2, (rulThickness / 2) + 1);
       }
     }
   };
