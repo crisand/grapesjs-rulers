@@ -126,7 +126,7 @@ ruler.prototype.builder = function () {
     ruler.prototype.utils.addClasss(element, ['rul_ruler', rulerStyle, 'rul_align_' + alignment]);
     canvas = container.appendChild(element);
     rulerz[alignment] = ruler.prototype.rulerConstructor(canvas, options, dimension);
-    rulerz[alignment].drawRuler(10000, options.rulerHeight);
+    rulerz[alignment].drawRuler(4000, options.rulerHeight);
     //rulerz[alignment].drawRuler(container.offsetWidth, options.rulerHeight);
     positionRuler(rulerz[alignment], alignment);
     attachListeners(container, rulerz[alignment]);
