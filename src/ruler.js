@@ -57,7 +57,8 @@ ruler.prototype.builder = function () {
         curRuler.orgPos = parseInt(curRuler.canvas.style.left);
         break;
       case 'left':
-        curRuler.canvas.style.top = ruler.prototype.utils.pixelize(-curRuler.canvas.height - 1);
+        curRuler.canvas.style.top = "0px"
+        //ruler.prototype.utils.pixelize(-curRuler.canvas.height - 1);
         curRuler.orgPos = parseInt(curRuler.canvas.style.top);
         rotateRuler(curRuler, 90);
         break;
@@ -364,9 +365,9 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
     rulLength = canvas.width = _rulerLength * 4;
     rulThickness = canvas.height = _rulerThickness;
     rulScale = _rulerScale || rulScale;
-    context.strokeStyle = "#000000";
+    context.strokeStyle = "rgba(0,0,0,0.47)";
     //options.strokeStyle;
-    context.fillStyle = "#000000";
+    context.fillStyle = "rgba(0,0,0,0.47)";
     //options.fillStyle;
     context.font = options.fontSize + ' ' + options.fontFamily;
     context.lineWidth = options.lineWidth;
