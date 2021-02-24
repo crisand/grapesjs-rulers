@@ -364,8 +364,10 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
     rulLength = canvas.width = _rulerLength * 4;
     rulThickness = canvas.height = _rulerThickness;
     rulScale = _rulerScale || rulScale;
-    context.strokeStyle = options.strokeStyle;
-    context.fillStyle = options.fillStyle;
+    context.strokeStyle = "#000000";
+    //options.strokeStyle;
+    context.fillStyle = "#000000";
+    //options.fillStyle;
     context.font = options.fontSize + ' ' + options.fontFamily;
     context.lineWidth = options.lineWidth;
     context.beginPath();
