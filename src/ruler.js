@@ -385,7 +385,7 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
       lineLengthMed = rulThickness / 3,
       lineLengthMin = rulThickness / 2;
     //console.log("rulThickness", zoom, rulScale, rulLength, lineLengthMax, lineLengthMed, lineLengthMin)
-    for (let pos = 0; pos <= 1000; pos++) {
+    for (let pos = 0; pos <= rulLength; pos++) {
       delta = pos;
       //delta = Math.round(rulScale * ((rulLength / 2) - pos) * 100) / 100
       draw = false;
