@@ -25,7 +25,7 @@ ruler.prototype.builder = function () {
     defaultOptions = {
       rulerHeight: 15,
       fontFamily: 'arial',
-      fontSize: '8px',
+      fontSize: '11px',
       strokeStyle: 'gray',
       sides: ['top', 'left'],
       cornerSides: ['TL'],
@@ -50,7 +50,8 @@ ruler.prototype.builder = function () {
   };
 
   const positionRuler = function (curRuler, alignment) {
-    curRuler.canvas.style.left = ruler.prototype.utils.pixelize(-((curRuler.canvas.width / 2) - curRuler.canvas.height));
+    curRuler.canvas.style.left = "0px"
+    //ruler.prototype.utils.pixelize(-((curRuler.canvas.width / 2) - curRuler.canvas.height));
     switch (alignment) {
       case 'top':
         curRuler.orgPos = parseInt(curRuler.canvas.style.left);
@@ -335,6 +336,7 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
     rulThickness = 0,
     rulLength = 0,
     rulScale = 1,
+    zoom = 100,
     dimension = rulDimension || 2,
     orgPos = 0,
     tracker = document.createElement('div');
@@ -353,6 +355,8 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
 
   const setScale = function (newScale) {
     rulScale = parseFloat(newScale);
+    console.log("new scale", newScale)
+    zoom = newScale * 100;
     drawPoints();
     return rulScale;
   };
@@ -378,12 +382,13 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
       lineLengthMax = 0,
       lineLengthMed = rulThickness / 3,
       lineLengthMin = rulThickness / 2;
-    //console.log("rulThickness", rulScale, rulThickness, rulLength, lineLengthMax, lineLengthMed, lineLengthMin)
-    for (let pos = 0; pos <= rulLength; pos++) {
-      delta = ((rulLength / 2) - pos);
-
+    console.log("rulThickness", zoom, rulScale, rulLength, lineLengthMax, lineLengthMed, lineLengthMin)
+    for (let pos = 0; pos <= 1000; pos++) {
+      delta = pos;
+      //delta = Math.round(rulScale * ((rulLength / 2) - pos) * 100) / 100
       draw = false;
       label = '';
+      let newPos = Math.abs(pos);
       //console.log("delta", delta)
       if (delta % 96 === 0) {
         pointLength = lineLengthMax;
@@ -399,9 +404,9 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
         draw = true;
       }
       if (draw) {
-        context.moveTo(pos, rulThickness + 0.5);
-        context.lineTo(pos, pointLength + 0.5);
-        context.fillText(label, pos, (rulThickness / 2) + 1);
+        context.moveTo(pos * 0.94, rulThickness + 0.5);
+        context.lineTo(pos * 0.94, pointLength + 0.5);
+        context.fillText(label, pos * 0.94 + 2, (rulThickness / 2) + 1);
       }
     }
   };
