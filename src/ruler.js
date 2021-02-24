@@ -643,7 +643,7 @@ ruler.prototype.utils = {
     return arguments[0];
   },
   pixelize: function (val) {
-    return val + 'px';
+    return val / 96 + 'px';
   },
   prependChild: function (container, element) {
     return container.insertBefore(element, container.firstChild);
