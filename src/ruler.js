@@ -27,7 +27,6 @@ ruler.prototype.builder = function () {
       fontFamily: 'arial',
       fontSize: '8px',
       strokeStyle: 'gray',
-      fillStyle: "red",
       sides: ['top', 'left'],
       cornerSides: ['TL'],
       lineWidth: 1,
@@ -118,7 +117,6 @@ ruler.prototype.builder = function () {
   };
 
   const constructRuler = function (container, alignment) {
-    console.log("constructRuler 3")
     let canvas,
       dimension = alignment === 'left' || alignment === 'right' ? VERTICAL : HORIZONTAL,
       rulerStyle = dimension === VERTICAL ? 'rul_ruler_Vertical' : 'rul_ruler_Horizontal',
@@ -127,8 +125,8 @@ ruler.prototype.builder = function () {
     ruler.prototype.utils.addClasss(element, ['rul_ruler', rulerStyle, 'rul_align_' + alignment]);
     canvas = container.appendChild(element);
     rulerz[alignment] = ruler.prototype.rulerConstructor(canvas, options, dimension);
-    //rulerz[alignment].drawRuler(container.offsetWidth, options.rulerHeight);
     rulerz[alignment].drawRuler(10000, options.rulerHeight);
+    //rulerz[alignment].drawRuler(container.offsetWidth, options.rulerHeight);
     positionRuler(rulerz[alignment], alignment);
     attachListeners(container, rulerz[alignment]);
   };
@@ -364,11 +362,8 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
     rulThickness = canvas.height = _rulerThickness;
     rulScale = _rulerScale || rulScale;
     context.strokeStyle = options.strokeStyle;
-    //context.strokeStyle = "#000000";
-    //context.fillStyle = "#000000";
     context.fillStyle = options.fillStyle;
     context.font = options.fontSize + ' ' + options.fontFamily;
-    //context.font = "12px" + ' ' + "Tahoma";
     context.lineWidth = options.lineWidth;
     context.beginPath();
     drawPoints();
@@ -381,29 +376,32 @@ ruler.prototype.rulerConstructor = function (_canvas, options, rulDimension) {
       delta = 0,
       draw = false,
       lineLengthMax = 0,
-      lineLengthMed = rulThickness / 2,
+      lineLengthMed = rulThickness / 3,
       lineLengthMin = rulThickness / 2;
-
-    for (let pos = 0; pos <= rulLength; pos += 1) {
+    //console.log("rulThickness", rulScale, rulThickness, rulLength, lineLengthMax, lineLengthMed, lineLengthMin)
+    for (let pos = 0; pos <= rulLength; pos++) {
       delta = ((rulLength / 2) - pos);
+
       draw = false;
       label = '';
-
-      if (delta % 50 === 0) {
+      //console.log("delta", delta)
+      if (delta % 96 === 0) {
         pointLength = lineLengthMax;
-        label = Math.round(Math.abs(delta) * rulScale);
+        label = delta / 96;
+        //(Math.abs(delta) * rulScale) / 96
+        //Math.round((Math.abs(delta) * rulScale) / 96);
         draw = true;
-      } else if (delta % 25 === 0) {
+      } else if (delta % 48 === 0) {
         pointLength = lineLengthMed;
         draw = true;
-      } else if (delta % 5 === 0) {
+      } else if (delta % 24 === 0) {
         pointLength = lineLengthMin;
         draw = true;
       }
       if (draw) {
-        context.moveTo(pos + 0.5, rulThickness + 0.5);
-        context.lineTo(pos + 0.5, pointLength + 0.5);
-        context.fillText(label, pos + 1.5, (rulThickness / 2) + 1);
+        context.moveTo(pos, rulThickness + 0.5);
+        context.lineTo(pos, pointLength + 0.5);
+        context.fillText(label, pos, (rulThickness / 2) + 1);
       }
     }
   };
@@ -643,7 +641,7 @@ ruler.prototype.utils = {
     return arguments[0];
   },
   pixelize: function (val) {
-    return val / 96 + 'px';
+    return val + 'px';
   },
   prependChild: function (container, element) {
     return container.insertBefore(element, container.firstChild);
