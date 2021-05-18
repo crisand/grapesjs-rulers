@@ -114,7 +114,7 @@ ruler.prototype.builder = function () {
     }
     guides.push({
       dimension: dimension,
-      line: ruler.prototype.guideLine(guide, options.container.querySelector('.rul_wrapper'), dimension, options, curDelta, moveCB, e, CUR_SCALE)
+      line: ruler.prototype.guideLine(guide, document.querySelector('.rul_wrapper'), dimension, options, curDelta, moveCB, e, CUR_SCALE)
     });
   };
 
