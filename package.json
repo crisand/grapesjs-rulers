@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-rulers",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Grapesjs Rulers",
   "main": "dist/grapesjs-rulers.min.js",
   "repository": {

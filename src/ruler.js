@@ -198,6 +198,7 @@ ruler.prototype.builder = function () {
   }
 
   const setPos = function (values) {
+    //console.log("ruller setPos")
     let orgX = 0,
       orgY,
       deltaX = 0,
@@ -209,7 +210,7 @@ ruler.prototype.builder = function () {
         deltaY = parseInt(orgY) - parseInt(curRul.canvas.style.top);
       } else {
         orgX = curRul.canvas.style.left;
-        curRul.canvas.style.left = ruler.prototype.utils.pixelize(curRul.orgPos + (parseInt(values.x)));
+        //curRul.canvas.style.left = ruler.prototype.utils.pixelize(curRul.orgPos + (parseInt(values.x)));
         deltaX = parseInt(orgX) - parseInt(curRul.canvas.style.left);
       }
     });
